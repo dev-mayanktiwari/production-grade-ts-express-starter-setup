@@ -1,14 +1,17 @@
+ 
+ 
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
- 
- 
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { createLogger, transports, format } from "winston";
-import { ConsoleTransportInstance, FileTransportInstance } from "winston/lib/winston/transports";
 import util from "util";
 import moment from "moment";
-import { AppConfig } from "../config";
-import { EApplicationEnvirontment } from "../constant/application";
 import path from "path";
+import { AppConfig } from "../config";
+import { ConsoleTransportInstance, FileTransportInstance } from "winston/lib/winston/transports";
+import { createLogger, transports, format } from "winston";
+import { EApplicationEnvirontment } from "../constant/application";
+import * as sourceMapSupport from "source-map-support";
+
+sourceMapSupport.install();
 
 const consoleLogFormat = format.printf((info) => {
   const { level, timestamp, message, meta = {} } = info;
