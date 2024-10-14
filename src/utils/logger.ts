@@ -1,10 +1,10 @@
- 
- 
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
 import util from "util";
 import moment from "moment";
 import path from "path";
+import { blue, green, magenta, red, yellow } from "colorette";
 import { AppConfig } from "../config";
 import { ConsoleTransportInstance, FileTransportInstance } from "winston/lib/winston/transports";
 import { createLogger, transports, format } from "winston";
@@ -13,15 +13,28 @@ import * as sourceMapSupport from "source-map-support";
 
 sourceMapSupport.install();
 
+const colorizeLevel = (level: string): string => {
+  switch (level) {
+    case "ERROR":
+      return red(level);
+    case "warn":
+      return yellow(level);
+    case "INFO":
+      return blue(level);
+
+    default:
+      return level;
+  }
+};
 const consoleLogFormat = format.printf((info) => {
   const { level, timestamp, message, meta = {} } = info;
-  const customLevel = level.toUpperCase();
+  const customLevel = colorizeLevel(level.toUpperCase());
 
-  const customTimestamp = moment(timestamp).format("YYYY-MM-DD HH:mm:ss");
+  const customTimestamp = green(moment(timestamp).format("YYYY-MM-DD HH:mm:ss"));
 
   const customMessage = message;
-  const customMeta = util.inspect(meta, { showHidden: false, depth: null });
-  const customLog = `${customLevel} - ${customTimestamp} - ${customMessage}\n${"META"} ${customMeta}\n`;
+  const customMeta = util.inspect(meta, { showHidden: false, depth: null, colors: true });
+  const customLog = `${customLevel} - ${customTimestamp} - ${customMessage}\n${magenta(`META`)} ${customMeta}\n`;
 
   return customLog;
 });
