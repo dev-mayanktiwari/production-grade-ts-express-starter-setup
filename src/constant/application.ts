@@ -19,6 +19,7 @@ export const enum EErrorStatusCode {
   METHOD_NOT_ALLOWED = 405, // HTTP method not allowed
   CONFLICT = 409, // Conflict in request, such as duplicate data
   UNPROCESSABLE_ENTITY = 422, // Validation error
+  TOO_MANY_REQUESTS = 429, // Rate limit exceeded
 
   // Server Error Status Codes
   INTERNAL_SERVER_ERROR = 500, // Generic server error

@@ -14,6 +14,7 @@ export const enum ResponseMessage {
   UNAUTHORIZED = "Unauthorized access.",
   FORBIDDEN = "Forbidden request.",
   VALIDATION_ERROR = "Validation error.",
-  SESSION_EXPIRED = "Session expired. Please log in again."
+  SESSION_EXPIRED = "Session expired. Please log in again.",
+  TOO_MANY_REQUESTS = "Too many requests. Please try again later."
 }
 
