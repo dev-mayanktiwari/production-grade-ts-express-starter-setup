@@ -19,6 +19,8 @@
   "author": "mayank tiwari",
   "license": "ISC",
   "devDependencies": {
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
     "@types/node": "^22.7.5",
     "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
