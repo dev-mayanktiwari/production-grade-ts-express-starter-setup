@@ -4,7 +4,9 @@
   "description": "Production grade backend repo, it is monolithic",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "dist": "npx tsc",
+    "dev": "nodemon src/index.ts",
+    "start": "node dist/index.js",
     "test": "node test.js",
     "prepare": "husky"
   },
@@ -18,7 +20,11 @@
   "author": "mayank tiwari",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^22.7.5",
     "husky": "^9.1.6",
-    "lint-staged": "^15.2.10"
+    "lint-staged": "^15.2.10",
+    "nodemon": "^3.1.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
   }
 }
