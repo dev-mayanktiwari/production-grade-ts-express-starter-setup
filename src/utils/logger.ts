@@ -4,12 +4,14 @@
 import util from "util";
 import moment from "moment";
 import path from "path";
+import "winston-mongodb";
 import { blue, green, magenta, red, yellow } from "colorette";
 import { AppConfig } from "../config";
 import { ConsoleTransportInstance, FileTransportInstance } from "winston/lib/winston/transports";
 import { createLogger, transports, format } from "winston";
 import { EApplicationEnvirontment } from "../constant/application";
 import * as sourceMapSupport from "source-map-support";
+import { MongoDBTransportInstance } from "winston-mongodb";
 
 sourceMapSupport.install();
 
@@ -77,6 +79,19 @@ const consoleTransport = (): Array<ConsoleTransportInstance> => {
   return [];
 };
 
+const mongoTransport = (): Array<MongoDBTransportInstance> => {
+  if (AppConfig.get("ENV") === EApplicationEnvirontment.PRODUCTION) {
+    return [
+      new transports.MongoDB({
+        level: "info",
+        db: AppConfig.get("DATABASE_URL") as string,
+        expireAfterSeconds: 60 * 60 * 24 * 7, // 7 days
+      })
+    ];
+  }
+  return [];
+};
+
 const fileTransport = (): Array<FileTransportInstance> => {
   return [
     new transports.File({
@@ -91,6 +106,6 @@ export default createLogger({
   defaultMeta: {
     meta: {}
   },
-  transports: [...fileTransport(), ...consoleTransport()]
+  transports: [...fileTransport(), ...consoleTransport(), ...mongoTransport()]
 });
 

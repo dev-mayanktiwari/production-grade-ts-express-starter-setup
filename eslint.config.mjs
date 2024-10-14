@@ -16,6 +16,7 @@ export default tseslint.config({
     rules: {
         'no-console': 'error',
         'no-useless-catch': 0,
+        'no-floating-promises': 0,
         quotes: ['error', 'double', { allowTemplateLiterals: true }]
     }
 })
