@@ -8,7 +8,7 @@ import moment from "moment";
 export default {
   self: (req: Request, res: Response, next: NextFunction) => {
     try {
-     // throw new Error("This is an error");
+      // throw new Error("This is an error");
       httpResponse(req, res, EResponseStatusCode.OK, "Hello World", { name: "John Doe" });
     } catch (error) {
       httpError(next, error, req);
